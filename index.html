@@ -1248,7 +1248,7 @@
                             <li><a href="https://jahidads.github.io/CyberShield/" target="_blank"><i class="fas fa-shield-alt" style="color:#2563ed; margin-right:7px;"></i>CyberShield</a></li>
                             <li><a href="https://jahidads.github.io/Cyber-Security/" target="_blank"><i class="fas fa-user-secret" style="color:#2563ed; margin-right:7px;"></i>Cybersecpro</a></li>
                             <li><a href="https://jahidads.github.io/EasyPay/" target="_blank"><i class="fas fa-credit-card" style="color:#2563ed; margin-right:7px;"></i>Easypay</a></li>
-                            <li><a href="https://jahidads.github.io/gmailtricks.bd/" target="_blank"><i class="fas fa-email" style="color:#2563ed; margin-right:7px;"></i>GmailTricks.bd</a></li>
+                            <li><a href="https://jahidads.github.io/gmailtricks.bd/" target="_blank"><i class="fas fa-envelope" style="color:#2563ed; margin-right:7px;"></i>GmailTricks.bd</a></li>
                             <li><a href="https://pixabay.com/users/jahidads-50320354/" target="_blank"><i class="fas fa-palette" style="color:#2563ed; margin-right:7px;"></i>Design</a></li>
                         </ul>
                     </div>
@@ -1267,36 +1267,12 @@
                     <div class="link-group">
                         <h4>✨Resources</h4>
                         <ul>
-                            <li>
-                                <a href="https://jahidads.github.io/Blog/" target="_blank">
-                                    <i class="fas fa-blog" style="color:#2563eb; margin-right:7px;"></i>
-                                    Blog
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://jahidads.github.io/DevCaseHub/" target="_blank">
-                                    <i class="fas fa-briefcase" style="color:#2563eb; margin-right:7px;"></i>
-                                    Case Studies
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://jahidads.github.io/Webinars/" target="_blank">
-                                    <i class="fas fa-chalkboard-teacher" style="color:#2563eb; margin-right:7px;"></i>
-                                    Webinars
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://jahidads.github.io/DevTools/" target="_blank">
-                                    <i class="fas fa-tools" style="color:#2563eb; margin-right:7px;"></i>
-                                    DevTools
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://jahidads.github.io/BookHub/" target="_blank">
-                                    <i class="fas fa-book" style="color:#2563eb; margin-right:7px;"></i>
-                                    BookHub
-                                </a>
-                            </li>
+                            <li><a href="https://jahidads.github.io/Blog/" target="_blank"><i class="fas fa-blog" style="color:#2563eb; margin-right:7px;"></i>Blog</a></li>
+                            <li><a href="https://jahidads.github.io/DevCaseHub/" target="_blank"><i class="fas fa-briefcase" style="color:#2563eb; margin-right:7px;"></i>Case Studies</a></li>
+                            <li><a href="https://jahidads.github.io/Webinars/" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#2563eb; margin-right:7px;"></i>Webinars</a></li>
+                            <li><a href="https://jahidads.github.io/DevTools/" target="_blank"><i class="fas fa-tools" style="color:#2563eb; margin-right:7px;"></i>DevTools</a></li>
+                            <li><a href="https://jahidads.github.io/BookHub/" target="_blank"><i class="fas fa-book" style="color:#2563eb; margin-right:7px;"></i>BookHub</a></li>
+                            <li><a href="https://jahidads.github.io/BookHub/" target="_blank"><i class="fas fa-book" style="color:#2563eb; margin-right:7px;"></i>BookHub</a></li>
                         </ul>
                     </div>
                     
@@ -1386,17 +1362,57 @@
             const message = document.getElementById('message').value;
             
             if (name && email && message) {
-                alert('Thank you for your message! I will contact you shortly.');
+                showPopup('✅ Thank you for your message! I will contact you shortly.', 'success');
                 contactForm.reset();
             } else {
-                alert('Please fill in all required fields.');
+                showPopup('Please fill in all required fields.', 'error');
             }
         });
+
+        // Simple popup/toast helper for inline notifications
+        function showPopup(message, type = 'success', duration = 3000) {
+            try {
+                const popup = document.createElement('div');
+                popup.textContent = message;
+                popup.setAttribute('role', 'status');
+                popup.style.position = 'fixed';
+                popup.style.right = '20px';
+                popup.style.top = '20px';
+                popup.style.zIndex = 9999;
+                popup.style.padding = '12px 16px';
+                popup.style.borderRadius = '10px';
+                popup.style.boxShadow = '0 6px 20px rgba(0,0,0,0.12)';
+                popup.style.fontWeight = '600';
+                popup.style.color = '#fff';
+                popup.style.opacity = '0';
+                popup.style.transition = 'opacity 220ms ease, transform 220ms ease';
+                popup.style.transform = 'translateY(6px)';
+                if (type === 'success') {
+                    popup.style.background = '#16a34a';
+                } else {
+                    popup.style.background = '#dc2626';
+                }
+                document.body.appendChild(popup);
+                // trigger enter animation
+                requestAnimationFrame(() => {
+                    popup.style.opacity = '1';
+                    popup.style.transform = 'translateY(0)';
+                });
+
+                setTimeout(() => {
+                    popup.style.opacity = '0';
+                    popup.style.transform = 'translateY(6px)';
+                    setTimeout(() => { if (popup.parentNode) popup.parentNode.removeChild(popup); }, 240);
+                }, duration);
+            } catch (e) {
+                // fallback to alert if anything goes wrong
+                alert(message);
+            }
+        }
     </script>
 </body>
 
 </html>
-
 
 
 
